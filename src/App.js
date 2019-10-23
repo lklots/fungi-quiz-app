@@ -41,7 +41,7 @@ function Quiz() {
     qid={data.createQuestion.qid}
     pics={data.createQuestion.pics}
     choices={data.createQuestion.choices}
-    onGuess={(qid, taxonId) => makeGuess({ variables: { qid, taxonId, } })}
+    onGuess={(qid, taxonId) => makeGuess({ variables: { qid, taxonId, } }).then(x => console.log(x))}
   />;
 }
 
