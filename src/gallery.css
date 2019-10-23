@@ -1,0 +1,9 @@
+.image-gallery-image img {
+  max-height: 300px;
+  width: auto;
+ }
+
+ .image-gallery-slides {
+  width: 50%;
+  margin: 0 auto;
+}
