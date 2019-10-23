@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-export const MODE = {
-  LOADING: 'loading',
-  CORRECT: 'correct',
-  WRONG: 'wrong',
-  UNSELECTED: 'unselected',
-}
+export default function Choice({ onClick, children, mode }) {
 
-export default function Choice({ onClick, children }) {
+  const [isLoading, setLoading] = useState(false);
+  const handler = async () => {
+    setLoading(true);
+    await onClick();
+    setLoading(false);
+  };
+  let variant;
+  if (mode === 'correct') {
+    variant = 'success'
+  } else if (mode === 'incorrect') {
+    variant = 'danger';
+  } else {
+    variant = 'outline-primary'
+  }
   return (
-    <Button variant="outline-primary" size="lg" onClick={onClick}>
+    <Button
+      variant={variant}
+      size="lg"
+      disabled={isLoading || mode !== 'unselected'}
+      onClick={() => handler()}>
       {children}
     </Button>
   );

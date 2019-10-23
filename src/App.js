@@ -1,4 +1,4 @@
-import { GraphQLClient, ClientContext, useQuery, useMutation } from 'graphql-hooks';
+import { GraphQLClient, ClientContext, useQuery } from 'graphql-hooks';
 import React from 'react';
 import './App.css';
 import Question from './Question.js';
@@ -21,19 +21,12 @@ const CREATE_QUESTION = `
   }
 `;
 
-const MAKE_GUESS = `
-  mutation($qid: ID!, $taxonId: ID!) {
-    makeGuess(qid: $qid, taxonId: $taxonId)
-  }
-`;
-
 function Quiz() {
   const { loading, error, data } = useQuery(CREATE_QUESTION, {
     variables: {
       taxonId: 47347,
     }
   });
-  const [makeGuess] = useMutation(MAKE_GUESS);
   if (loading) return 'Loading...';
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
 
@@ -41,7 +34,6 @@ function Quiz() {
     qid={data.createQuestion.qid}
     pics={data.createQuestion.pics}
     choices={data.createQuestion.choices}
-    onGuess={(qid, taxonId) => makeGuess({ variables: { qid, taxonId, } }).then(x => console.log(x))}
   />;
 }
 
