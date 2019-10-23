@@ -17,21 +17,23 @@ const MAKE_GUESS = `
   }
 `;
 
-export default function Question({qid, pics, choices }) {
-  const [makeGuess] = useMutation(MAKE_GUESS);
-  const [answer, setAnswer] = useState(null);
+export default function Question({qid, pics, choices, onAnswer }) {
+  const [makeGuess, {loading, error, data}] = useMutation(MAKE_GUESS);
+  let answer;
+  if (data) {
+    answer = data.makeGuess;
+  }
 
   async function guessHandler(qid, taxonId) {
     const resp = await makeGuess({ variables: { qid, taxonId }});
-    setAnswer(resp.data.makeGuess);
   }
 
   const images = pics.map( (pic) => <div><img src={pic} alt=""/></div>);
   const buttons = choices.map( (choice) => {
     let mode = 'unselected';
-    if (answer && answer === choice.taxonId) {
+    if (!error && answer && answer === choice.taxonId) {
       mode = 'correct';
-    } else if (answer && answer !== choice.taxonId) {
+    } else if (!error && answer && answer !== choice.taxonId) {
       mode = 'incorrect';
     }
     return (
