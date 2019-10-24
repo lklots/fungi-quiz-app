@@ -26,6 +26,9 @@ export default function Question({qid, pics, choices, onAnswer }) {
 
   async function guessHandler(qid, taxonId) {
     const resp = await makeGuess({ variables: { qid, taxonId }});
+    if (resp.data && !resp.error) {
+      onAnswer();
+    }
   }
 
   const images = pics.map( (pic) => <div><img src={pic} alt=""/></div>);
