@@ -41,10 +41,14 @@ export default function Question({qid, pics, choices, onAnswer }) {
     }
     return (
       <Choice
+        class='choice'
         mode={mode}
         onClick={() => guessHandler(qid, choice.taxonId)}>
-        <div>
-          {choice.name + " " + choice.commonName}
+        <div class='commonName'>
+          {choice.commonName}
+        </div>
+        <div class='name'>
+          {choice.name}
         </div>
       </Choice>
     );

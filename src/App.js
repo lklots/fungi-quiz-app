@@ -4,6 +4,8 @@ import delay from 'delay';
 import './App.css';
 import Question from './Question.js';
 
+import { Container, Col, Row } from 'react-bootstrap';
+
 const client = new GraphQLClient({
   url: 'http://localhost:4000/graphql'
 })
@@ -42,8 +44,25 @@ function Quiz() {
 function App() {
   return (
     <ClientContext.Provider value={client}>
-      <div>
-        <Quiz />
+      <div class="root">
+
+      <div class="panel">
+        <div class="clue">
+          <div class="clue-text">
+            <img class="clue-img" src="https://static.inaturalist.org/photos/54847498/medium.jpeg?1571902439"/>
+          </div>
+        </div>
+        <Container style={{"width": "400px"}}>
+          <Row>
+            <Col><div class="choice">Golden</div></Col>
+            <Col><div class="choice">Golden Chanelld flsakjadf l;daskj f;alsk</div></Col>
+          </Row>
+          <Row>
+            <Col><div class="choice">Golden Chanterell</div></Col>
+            <Col><div class="choice">Golden Chanterelfdsfasfd</div></Col>
+          </Row>
+        </Container>
+      </div>
       </div>
     </ClientContext.Provider>
   );
