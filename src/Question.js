@@ -52,13 +52,19 @@ export default function Question({qid, pics, choices, onAnswer }) {
     );
   });
 
+  // slick slider has difficulty with showing one image
+  let car;
+  if (images.length === 1) {
+    car = <div style={{  "display": "flex", "justify-content": "center"}}>{images[0]}</div>;
+  } else {
+    car = <Slider dots variableWidth infinite>{images}</Slider>;
+  }
+
   return (
     <Grid style={{ width: '40rem'}}>
-      <Grid>
+      <Grid items>
         <div class="carousel">
-          <Slider dots variableWidth infinite>
-            {images}
-          </Slider>
+          {car}
         </div>
       </Grid>
       <Grid container spacing={5} justify="center">
