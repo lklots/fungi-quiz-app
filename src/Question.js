@@ -53,11 +53,13 @@ export default function Question({qid, pics, choices, onAnswer }) {
   });
 
   return (
-    <Grid style={{ width: '50rem'}}>
+    <Grid style={{ width: '40rem'}}>
       <Grid>
-        <Slider dots>
-          {images}
-        </Slider>
+        <div class="carousel">
+          <Slider dots variableWidth infinite>
+            {images}
+          </Slider>
+        </div>
       </Grid>
       <Grid container spacing={5} justify="center">
         <Grid item>
