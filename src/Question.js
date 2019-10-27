@@ -8,6 +8,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import ReactFitText from 'react-fittext';
+
 import Choice from './Choice.js';
 
 const MAKE_GUESS = `
@@ -30,7 +32,7 @@ export default function Question({qid, pics, choices, onAnswer }) {
     }
   }
 
-  const images = pics.map( (pic) => <div><img src={pic} alt=""/></div>);
+  const images = pics.map( (pic) => <img class="carousel-img" src={pic} alt=""/>);
   const buttons = choices.map( (choice) => {
     let mode = 'unselected';
     if (!error && answer && answer === choice.taxonId) {
@@ -42,32 +44,26 @@ export default function Question({qid, pics, choices, onAnswer }) {
       <Choice
         mode={mode}
         onClick={() => guessHandler(qid, choice.taxonId)}>
-        <Typography variant="h6" style={{ color: '#FEFEFE' }}>
-          {choice.commonName}
-        </Typography>
-        <Typography variant="subtitle1" style={{ color: '#FEFEFE60' }}>
-          ({choice.name})
-        </Typography>
+        <ReactFitText>
+          <Typography variant="h6" style={{ color: '#FEFEFE' }}>
+            {choice.commonName}
+          </Typography>
+        </ReactFitText>
+        <ReactFitText>
+          <Typography variant="subtitle1" style={{ color: '#FEFEFE60' }}>
+            ({choice.name})
+          </Typography>
+        </ReactFitText>
       </Choice>
     );
   });
 
-  // slick slider has difficulty with showing one image
-  let car;
-  if (images.length === 1) {
-    car = <div style={{  "display": "flex", "justify-content": "center"}}>{images[0]}</div>;
-  } else {
-    car = <Slider dots variableWidth infinite>{images}</Slider>;
-  }
-
   return (
-    <Grid style={{ width: '40rem'}}>
-      <Grid items>
-        <div class="carousel">
-          {car}
-        </div>
-      </Grid>
-      <Grid container spacing={5} justify="center">
+    <Grid>
+      <div class="carousel">
+        <Slider arrows dots infinite>{images}</Slider>
+      </div>
+      <Grid container spacing={2} justify="center">
         <Grid item>
           {buttons[0]}
         </Grid>

@@ -1,12 +1,19 @@
-.slick-slide img {
-  max-height: 400px;
-  width: auto;
-  border-radius: .25rem;
-  margin: 0 auto;
+
+body {
+  background-color: #28258A;
 }
 
-#root {
-  background-color: #28258A;
+.carousel {
+  margin: 0 auto;
+  width: 40vh;
+  height: 40vh;
+  background-color: #DE0958;
+  border: 2px solid black;
+  margin-bottom: 2vh;
+}
+
+.carousel-img {
+  max-height: 40vh;
 }
 
 .choice {
@@ -14,10 +21,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 200px;
+  width: 15vh;
+  height: 15vh;
   border-radius: 20%;
-  padding: 10px;
+  padding: 5px;
   border: 3px solid #5856CD;
 }
 

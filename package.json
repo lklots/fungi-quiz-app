@@ -8,6 +8,7 @@
     "graphql-hooks": "^4.0.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-fittext": "^1.0.0",
     "react-scripts": "3.2.0",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1"
