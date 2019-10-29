@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { GraphQLClient, ClientContext, useMutation } from 'graphql-hooks';
 import _ from 'lodash';
 import delay from 'delay';
+import 'typeface-varela-round';
+
 
 import Question from './Question.js';
 import './App.css';
@@ -32,15 +34,17 @@ function Quiz() {
   if (!data) return 'Initial load...';
 
   return (
-    <Question
-      qid={data.createQuestion.qid}
-      pics={data.createQuestion.pics}
-      choices={_.shuffle(data.createQuestion.choices)}
-      onAnswer={async() => {
-        await delay(1000); // move to the next question after a wait
-        createQuestion({variables: { taxonId: 47347 }});
-      }}
-    />
+    <div>
+      <Question
+        qid={data.createQuestion.qid}
+        pics={data.createQuestion.pics}
+        choices={_.shuffle(data.createQuestion.choices)}
+        onAnswer={async() => {
+          await delay(1000); // move to the next question after a wait
+          createQuestion({variables: { taxonId: 47347 }});
+        }}
+      />
+    </div>
   );
 }
 

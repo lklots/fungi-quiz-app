@@ -13,7 +13,8 @@
     "react-scripts": "3.2.0",
     "react-slick": "^0.25.2",
     "react-spring": "^8.0.27",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "typeface-varela-round": "0.0.71"
   },
   "scripts": {
     "start": "react-scripts start",
