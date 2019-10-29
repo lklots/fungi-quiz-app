@@ -1,6 +1,4 @@
-import React, { useRef } from 'react';
-
-import _ from 'lodash';
+import React, { useRef, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -85,7 +83,7 @@ export default function Question({qid, pics, choices, onAnswer }) {
         </div>
         <Grid container spacing={2} justify="center">
           {
-            _.shuffle(buttons).map(b => <Grid item>{b}</Grid>)
+            buttons.map(b => <Grid item>{b}</Grid>)
           }
         </Grid>
       </Grid>
