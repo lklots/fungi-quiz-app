@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { useMutation } from 'graphql-hooks';
 import {useSpring, useTrail, animated, useChain} from 'react-spring'
@@ -60,16 +61,12 @@ export default function Question({qid, pics, choices, onAnswer }) {
         <Choice
           mode={mode}
           onClick={() => guessHandler(qid, choice.taxonId)}>
-          <ReactFitText>
-            <Typography variant="h6" style={{ color: '#FEFEFE' }}>
+            <span class="choice-title">
               {choice.commonName}
-            </Typography>
-          </ReactFitText>
-          <ReactFitText>
-            <Typography variant="subtitle1" style={{ color: '#FEFEFE60' }}>
+            </span>
+            <span class="choice-subtitle">
               ({choice.name})
-            </Typography>
-          </ReactFitText>
+            </span>
         </Choice>
       </animated.div>
     );

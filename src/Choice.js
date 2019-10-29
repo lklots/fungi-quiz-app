@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import ButtonBase from '@material-ui/core/ButtonBase';
 
-export default function Choice({ onClick, children, mode, }) {
-
+export default function Choice({ onClick, children, mode, classes, }) {
   const [isLoading, setLoading] = useState(false);
   const handler = async () => {
     setLoading(true);
     await onClick();
     setLoading(false);
   };
+
   return (
-    <ButtonBase style={{ "borderRadius": "20%"}} onClick={() => !isLoading && mode === 'unselected' && handler()}>
-      <div class={"choice " + mode}>
-        {children}
-      </div>
-    </ButtonBase>
+    <div onClick={() => !isLoading && mode === 'unselected' && handler()} class={"choice " + mode}>
+      {children}
+    </div>
   );
 }
+
