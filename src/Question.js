@@ -30,10 +30,14 @@ export default function Question({qid, pics, choices, answer, onSelected }) {
   const images = pics.map( (pic, i) => <img key={"img"+i} className="carousel-img" src={pic} alt=""/>);
   const buttons = choices.map( (choice, index) => {
     let mode = 'unselected';
-    if (answer && answer === choice.taxonId) {
-      mode = 'correct';
-    } else if (answer && answer !== choice.taxonId && selected === choice.taxonId) {
-      mode = 'wrong';
+    if (answer) {
+      if (answer === choice.taxonId) {
+        mode = 'correct';
+      } else if (selected === choice.taxonId) {
+        mode = 'wrong';
+      } else {
+        mode = 'unselected-ignore';
+      }
     } else if (choice.taxonId === selected) {
       mode = 'selected';
     }
