@@ -1,7 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { useMutation } from 'graphql-hooks';
 import {useSpring, useTrail, animated, useChain} from 'react-spring'
@@ -9,8 +7,6 @@ import {useSpring, useTrail, animated, useChain} from 'react-spring'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-import ReactFitText from 'react-fittext';
 
 import Choice from './Choice.js';
 
@@ -21,7 +17,7 @@ const MAKE_GUESS = `
 `;
 
 export default function Question({qid, pics, choices, onAnswer }) {
-  const [makeGuess, {error, data}] = useMutation(MAKE_GUESS);
+  // Animation
   const animateContainerRef = useRef();
   const animateContainerProps = useSpring({
     ref: animateContainerRef,
@@ -36,6 +32,9 @@ export default function Question({qid, pics, choices, onAnswer }) {
   });
   useChain([animateContainerRef, animateChoicesRef], [0, 0.2]);
 
+  const [selected, setSelected] = useState(null);
+
+  const [makeGuess, {error, data}] = useMutation(MAKE_GUESS);
   let answer;
   if (data) {
     answer = data.makeGuess;
@@ -48,26 +47,27 @@ export default function Question({qid, pics, choices, onAnswer }) {
     }
   }
 
-  const images = pics.map( (pic, i) => <img key={"img"+i} class="carousel-img" src={pic} alt=""/>);
+  const images = pics.map( (pic, i) => <img key={"img"+i} className="carousel-img" src={pic} alt=""/>);
   const buttons = choices.map( (choice, index) => {
     let mode = 'unselected';
     if (!error && answer && answer === choice.taxonId) {
       mode = 'correct';
     } else if (!error && answer && answer !== choice.taxonId) {
       mode = 'incorrect';
+    } else if (choice.taxonId === selected) {
+      mode = 'selected';
     }
+
     return (
-      <animated.div key={"choice"+index} style={animateChoicesProps[index]}>
+      <animated.div style={animateChoicesProps[index]}>
         <Choice
+          title={choice.commonName}
+          subtitle={choice.name}
           mode={mode}
-          onClick={() => guessHandler(qid, choice.taxonId)}>
-            <span class="choice-title">
-              {choice.commonName}
-            </span>
-            <span class="choice-subtitle">
-              ({choice.name})
-            </span>
-        </Choice>
+          onClick={() => {
+            setSelected(choice.taxonId);
+            guessHandler(qid, choice.taxonId);
+          }} />
       </animated.div>
     );
   });
@@ -75,13 +75,11 @@ export default function Question({qid, pics, choices, onAnswer }) {
   return (
     <animated.div style={animateContainerProps}>
       <Grid>
-        <div class="carousel-container">
+        <div className="carousel-container">
             <Slider arrows dots infinite>{images}</Slider>
         </div>
         <Grid container spacing={2} justify="center">
-          {
-            buttons.map(b => <Grid item>{b}</Grid>)
-          }
+          {buttons.map((b, i) => <Grid item key={"choice"+i}>{b}</Grid>)}
         </Grid>
       </Grid>
     </animated.div>

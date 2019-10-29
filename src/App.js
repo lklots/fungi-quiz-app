@@ -41,7 +41,7 @@ function Quiz() {
         createQuestion({variables: { taxonId: 47347 }});
       }}
     />
-  )
+  );
 }
 
 function App() {

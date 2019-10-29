@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function Choice({ onClick, children, mode, classes, }) {
-  const [isLoading, setLoading] = useState(false);
-  const handler = async () => {
-    setLoading(true);
-    await onClick();
-    setLoading(false);
-  };
+import './Choice.css';
 
+export default function Choice({ mode, title, subtitle, onClick }) {
   return (
-    <div onClick={() => !isLoading && mode === 'unselected' && handler()} class={"choice " + mode}>
-      {children}
+    <div className={"choice " + mode} onClick={onClick}>
+      <span className="choice-title">
+        {title}
+      </span>
+      <span className="choice-subtitle">
+        ({subtitle})
+      </span>
     </div>
   );
 }
