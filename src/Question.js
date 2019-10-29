@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
-import { useMutation } from 'graphql-hooks';
 import {useSpring, useTrail, animated, useChain} from 'react-spring'
 
 import Slider from 'react-slick';
@@ -10,13 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import Choice from './Choice.js';
 
-const MAKE_GUESS = `
-  mutation($qid: ID!, $taxonId: ID!) {
-    makeGuess(qid: $qid, taxonId: $taxonId)
-  }
-`;
-
-export default function Question({qid, pics, choices, onAnswer }) {
+export default function Question({qid, pics, choices, answer, onSelected }) {
   // Animation
   const animateContainerRef = useRef();
   const animateContainerProps = useSpring({
@@ -34,25 +27,12 @@ export default function Question({qid, pics, choices, onAnswer }) {
 
   const [selected, setSelected] = useState(null);
 
-  const [makeGuess, {error, data}] = useMutation(MAKE_GUESS);
-  let answer;
-  if (data) {
-    answer = data.makeGuess;
-  }
-
-  async function guessHandler(qid, taxonId) {
-    const resp = await makeGuess({ variables: { qid, taxonId }});
-    if (resp.data && !resp.error) {
-      onAnswer();
-    }
-  }
-
   const images = pics.map( (pic, i) => <img key={"img"+i} className="carousel-img" src={pic} alt=""/>);
   const buttons = choices.map( (choice, index) => {
     let mode = 'unselected';
-    if (!error && answer && answer === choice.taxonId) {
+    if (answer && answer === choice.taxonId) {
       mode = 'correct';
-    } else if (!error && answer && answer !== choice.taxonId && selected === choice.taxonId) {
+    } else if (answer && answer !== choice.taxonId && selected === choice.taxonId) {
       mode = 'wrong';
     } else if (choice.taxonId === selected) {
       mode = 'selected';
@@ -66,7 +46,7 @@ export default function Question({qid, pics, choices, onAnswer }) {
           mode={mode}
           onClick={() => {
             setSelected(choice.taxonId);
-            guessHandler(qid, choice.taxonId);
+            onSelected(qid, choice.taxonId);
           }} />
       </animated.div>
     );
@@ -76,7 +56,7 @@ export default function Question({qid, pics, choices, onAnswer }) {
     <animated.div style={animateContainerProps}>
       <Grid>
         <div className="carousel-container">
-            <Slider arrows dots infinite>{images}</Slider>
+          <Slider arrows dots infinite>{images}</Slider>
         </div>
         <Grid container spacing={1} justify="center">
           {buttons.map((b, i) => <Grid item key={"choice"+i}>{b}</Grid>)}

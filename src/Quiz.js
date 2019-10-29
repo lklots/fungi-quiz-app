@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import delay from 'delay';
 import { useMutation } from 'graphql-hooks';
 
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import Question from './Question.js';
+import Submit from './Submit.js';
 
 const CREATE_QUESTION = `
   mutation($taxonId: ID!) {
@@ -22,9 +22,20 @@ const CREATE_QUESTION = `
   }
 `;
 
+const MAKE_GUESS = `
+  mutation($qid: ID!, $taxonId: ID!) {
+    makeGuess(qid: $qid, taxonId: $taxonId)
+  }
+`;
+
 export default function Quiz() {
   const [createQuestion, { loading, error, data}] = useMutation(CREATE_QUESTION);
   useEffect(() => createQuestion({variables: { taxonId: 47347 }}), []);
+
+  const [makeGuess] = useMutation(MAKE_GUESS);
+  const [selection, setSelection] = useState(null);
+  const [answer, setAnswer] = useState(null);
+
   if (loading) return 'Loading...';
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
   if (!data) return 'Initial load...';
@@ -33,19 +44,20 @@ export default function Quiz() {
     <Grid container direction="column " spacing={4} alignItems="center">
       <Grid item>
         <Question
+          answer={answer}
           qid={data.createQuestion.qid}
           pics={data.createQuestion.pics}
-          choices={_.shuffle(data.createQuestion.choices)}
-          onAnswer={async() => {
-            await delay(1000); // move to the next question after a wait
-            createQuestion({variables: { taxonId: 47347 }});
-          }}
+          choices={data.createQuestion.choices}
+          onSelected={(taxonId) => setSelection(taxonId)}
         />
       </Grid>
       <Grid container item justify="center" xs={12}>
-        <Button variant="contained" color="primary">
-          Check
-        </Button>
+        <Submit disabled={!selection} onClick={async() => {
+          const resp = await makeGuess({ variables: { qid: data.createQuestion.qid, taxonId: selection }});
+          if (resp.data) {
+            setAnswer(resp.data.makeGuess);
+          }
+        }}/>
       </Grid>
     </Grid>
   );

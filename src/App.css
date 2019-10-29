@@ -18,3 +18,33 @@ body {
   max-height: 40vh;
 }
 
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 20vw;
+  border: 2px solid #499B02;
+  border-bottom: 4px solid #499B02;
+  background-color: #68C106;
+  color: #FFFFFF;
+}
+
+.submit:hover {
+  background-color: #74D900;
+}
+
+.submit:active {
+  border-bottom: 2px solid #499B02;
+  transform: translate3d(0, 4px, 0);
+}
+
+.submit-disabled,
+.submit-disabled:active {
+  background-color: #DFDFDF;
+  color: #9F9F9F;
+  border: none;
+  transform: none;
+}
