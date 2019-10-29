@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function Submit({onClick, disabled}) {
+import './Submit.css';
+
+export default function Submit({onClick, disabled, children}) {
   let className = "submit";
   if (disabled) {
     className += " submit-disabled";
@@ -9,6 +11,6 @@ export default function Submit({onClick, disabled}) {
     <div
       onClick={() => !disabled && onClick()}
       className={className}>
-      SUBMIT
+      {children}
     </div>);
 }

@@ -40,6 +40,19 @@ export default function Quiz() {
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
   if (!data) return 'Initial load...';
 
+  const submitHandler = async() => {
+    const resp = await makeGuess({ variables: { qid: data.createQuestion.qid, taxonId: selection }});
+    if (resp.data) {
+      setAnswer(resp.data.makeGuess);
+    }
+  }
+
+  const continueHandler = async() => {
+    const resp = await createQuestion({ variables: { taxonId: 47347 }});
+    setAnswer(null);
+    setSelection(null);
+  }
+
   return (
     <Grid container direction="column " spacing={4} alignItems="center">
       <Grid item>
@@ -52,12 +65,10 @@ export default function Quiz() {
         />
       </Grid>
       <Grid container item justify="center" xs={12}>
-        <Submit disabled={!selection} onClick={async() => {
-          const resp = await makeGuess({ variables: { qid: data.createQuestion.qid, taxonId: selection }});
-          if (resp.data) {
-            setAnswer(resp.data.makeGuess);
-          }
-        }}/>
+        {answer
+          ? <Submit onClick={continueHandler}>CONTINUE</Submit>
+          : <Submit disabled={!selection} onClick={submitHandler}>SUBMIT</Submit>
+        }
       </Grid>
     </Grid>
   );
