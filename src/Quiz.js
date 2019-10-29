@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
 import delay from 'delay';
-import Button from '@material-ui/core/Button';
 import { useMutation } from 'graphql-hooks';
+
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import Question from './Question.js';
 
@@ -28,19 +30,23 @@ export default function Quiz() {
   if (!data) return 'Initial load...';
 
   return (
-    <div>
-      <Question
-        qid={data.createQuestion.qid}
-        pics={data.createQuestion.pics}
-        choices={_.shuffle(data.createQuestion.choices)}
-        onAnswer={async() => {
-          await delay(1000); // move to the next question after a wait
-          createQuestion({variables: { taxonId: 47347 }});
-        }}
-      />
-      <Button variant="contained" color="primary">
-        Check
-      </Button>
-    </div>
+    <Grid container direction="column " spacing={4} alignItems="center">
+      <Grid item>
+        <Question
+          qid={data.createQuestion.qid}
+          pics={data.createQuestion.pics}
+          choices={_.shuffle(data.createQuestion.choices)}
+          onAnswer={async() => {
+            await delay(1000); // move to the next question after a wait
+            createQuestion({variables: { taxonId: 47347 }});
+          }}
+        />
+      </Grid>
+      <Grid container item justify="center" xs={12}>
+        <Button variant="contained" color="primary">
+          Check
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
