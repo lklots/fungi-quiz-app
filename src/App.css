@@ -30,6 +30,7 @@ body {
   border-bottom: 4px solid #499B02;
   background-color: #68C106;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .submit:hover {
@@ -42,9 +43,11 @@ body {
 }
 
 .submit-disabled,
-.submit-disabled:active {
+.submit-disabled:active,
+.submit-disabled:hover {
   background-color: #DFDFDF;
   color: #9F9F9F;
   border: none;
   transform: none;
+  cursor: default;
 }

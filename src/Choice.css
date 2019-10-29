@@ -11,6 +11,7 @@
   border: 2px solid #DDDDDF;
   border-bottom: 4px solid #DDDDDF;
   color: #373736;
+  cursor: pointer;
 }
 
 .choice:hover {
