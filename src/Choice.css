@@ -4,9 +4,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 20vh;
-  height: 15vh;
-  border-radius: 20%;
+  width: 80vw;
+  height: 8vh;
+  border-radius: 10px;
   padding: 5px;
   border: 2px solid #DDDDDF;
   border-bottom: 4px solid #DDDDDF;
@@ -33,13 +33,13 @@
 }
 
 .choice-title {
-  font-size: 16px;
   font-weight: 500;
+  font-size: calc(0.5rem + 2vmin);
 }
 
 .choice-subtitle {
-  font-size: 12px;
   font-weight: 400;
+  font-size: calc(0.5rem + 2vmin);
   color: #36373770;
 }
 
