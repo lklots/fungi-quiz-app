@@ -4,7 +4,7 @@ import './Choice.css';
 
 export default function Choice({ mode, title, subtitle, onClick }) {
   return (
-    <div className={"choice " + mode} onClick={onClick}>
+    <div className={"choice choice-"+mode} onClick={() => mode === 'unselected' && onClick()}>
       <span className="choice-title">
         {title}
       </span>

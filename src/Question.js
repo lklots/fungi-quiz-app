@@ -52,8 +52,8 @@ export default function Question({qid, pics, choices, onAnswer }) {
     let mode = 'unselected';
     if (!error && answer && answer === choice.taxonId) {
       mode = 'correct';
-    } else if (!error && answer && answer !== choice.taxonId) {
-      mode = 'incorrect';
+    } else if (!error && answer && answer !== choice.taxonId && selected === choice.taxonId) {
+      mode = 'wrong';
     } else if (choice.taxonId === selected) {
       mode = 'selected';
     }

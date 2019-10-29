@@ -23,7 +23,8 @@
   color: #1DA0F390;
 }
 
-.choice:active, .selected {
+.choice:active,
+.choice-selected {
   background-color: #D6F1FE;
   border-bottom: 2px solid #DDDDDF;
   color: #1DA0F3;
@@ -36,24 +37,43 @@
   font-weight: 500;
 }
 
-.choice:active > .choice-subtitle {
-  color: #1DA0F390;
-}
 .choice-subtitle {
   font-size: 12px;
   font-weight: 400;
   color: #36373770;
 }
 
-.choice-subtitle:active {
-  color: #1DA0F370;
+.choice-correct,
+.choice-correct:hover {
+  background-color: #ACF278;
+  border: 2px solid #68C100;
+  border-bottom-width: 4px;
+  color: #499A08;
 }
 
-.correct {
-  background-color: #68C10670;
+div.choice-correct > .choice-subtitle,
+.choice-correct:hover > .choice-subtitle {
+  color: #499A0890;
 }
 
-.wrong {
-  background-color: #DE0958;
-  border: 3px solid #DE0958;
+.choice-wrong,
+.choice-wrong:hover {
+  background-color: #FCB2B4;
+  border: 2px solid #FB313B;
+  border-bottom-width: 4px;
+  color: #E21724;
+}
+
+.choice-wrong > .choice-subtitle,
+.choice-wrong:hover > .choice-subtitle {
+  color: #E2172490;
+}
+
+.choice-selected > .choice-title {
+  color: #1DA0F3;
+}
+
+.choice:active > .choice-subtitle,
+.choice-selected > .choice-subtitle {
+  color: #1DA0F390;
 }
