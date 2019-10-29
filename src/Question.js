@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 
+import _ from 'lodash';
+
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { useMutation } from 'graphql-hooks';
@@ -82,12 +84,9 @@ export default function Question({qid, pics, choices, onAnswer }) {
             <Slider arrows dots infinite>{images}</Slider>
         </div>
         <Grid container spacing={2} justify="center">
-          <Grid item>
-            {buttons[0]}
-          </Grid>
-          <Grid item>
-            {buttons[1]}
-          </Grid>
+          {
+            _.shuffle(buttons).map(b => <Grid item>{b}</Grid>)
+          }
         </Grid>
       </Grid>
     </animated.div>
