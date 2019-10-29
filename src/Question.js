@@ -78,7 +78,7 @@ export default function Question({qid, pics, choices, onAnswer }) {
         <div className="carousel-container">
             <Slider arrows dots infinite>{images}</Slider>
         </div>
-        <Grid container spacing={2} justify="center">
+        <Grid container spacing={1} justify="center">
           {buttons.map((b, i) => <Grid item key={"choice"+i}>{b}</Grid>)}
         </Grid>
       </Grid>
