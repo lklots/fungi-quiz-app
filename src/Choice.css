@@ -44,6 +44,15 @@
   color: #36373770;
 }
 
+.choice-selected > .choice-title {
+  color: #1DA0F3;
+}
+
+.choice:active > .choice-subtitle,
+.choice-selected > .choice-subtitle {
+  color: #1DA0F390;
+}
+
 .choice-correct,
 .choice-correct:hover {
   background-color: #ACF278;
@@ -70,11 +79,3 @@ div.choice-correct > .choice-subtitle,
   color: #E2172490;
 }
 
-.choice-selected > .choice-title {
-  color: #1DA0F3;
-}
-
-.choice:active > .choice-subtitle,
-.choice-selected > .choice-subtitle {
-  color: #1DA0F390;
-}

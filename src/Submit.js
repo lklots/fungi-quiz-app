@@ -10,7 +10,7 @@ export default function Submit({onClick, disabled, children}) {
   return (
     <div
       onClick={() => !disabled && onClick()}
-      className={className}>
+      className={"noSelect " + className}>
       {children}
     </div>);
 }

@@ -12,12 +12,14 @@
   cursor: pointer;
 }
 
-.submit:hover {
-  background-color: #74D900;
+@media not all and (hover: none) {
+  .submit:hover {
+    background-color: #74D900
+  }
 }
 
 .submit:active {
-  border-bottom: 2px solid #499B02;
+  border: none;
   transform: translate3d(0, 4px, 0);
 }
 
