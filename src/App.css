@@ -3,13 +3,13 @@ body {
   background-color: #28258A;
 }
 
-.carousel {
+.carousel-container {
   margin: 0 auto;
+  border: 2px solid #5856CD;
+  border-radius: 2%;
+  margin-bottom: 8vh;
   width: 40vh;
   height: 40vh;
-  background-color: #DE0958;
-  border: 2px solid black;
-  margin-bottom: 2vh;
 }
 
 .carousel-img {
@@ -36,8 +36,4 @@ body {
 .wrong {
   background-color: #DE0958;
   border: 3px solid #DE0958;
-}
-
-.carousel {
-  padding: 25px;
 }
