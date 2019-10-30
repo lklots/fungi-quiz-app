@@ -1,0 +1,27 @@
+.carousel-container {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.carousel-slide {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.carousel-arrow-next {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(0, -50%);
+  right: -25px;
+}
+
+.carousel-arrow-prev {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(0, -50%);
+  left: -45px;
+}

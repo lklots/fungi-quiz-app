@@ -14,7 +14,9 @@ const client = new GraphQLClient({
 function App() {
   return (
     <ClientContext.Provider value={client}>
-      <Quiz />
+      <div id="app">
+        <Quiz />
+      </div>
     </ClientContext.Provider>
   );
 }

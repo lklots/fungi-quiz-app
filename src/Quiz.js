@@ -12,7 +12,11 @@ const CREATE_QUESTION = `
   mutation($taxonId: ID!) {
     createQuestion(taxonId: $taxonId) {
       qid
-      pics
+      photos {
+        url
+        origWidth
+        origHeight
+      }
       choices {
         taxonId
         name
@@ -54,17 +58,17 @@ export default function Quiz() {
   }
 
   return (
-    <Grid container direction="column " spacing={2} alignItems="center">
+    <Grid container direction="column" alignItems="center" spacing={2}>
       <Grid item>
         <Question
           answer={answer}
           qid={data.createQuestion.qid}
-          pics={data.createQuestion.pics}
+          photos={data.createQuestion.photos}
           choices={data.createQuestion.choices}
           onSelected={(taxonId) => setSelection(taxonId)}
         />
       </Grid>
-      <Grid container item justify="center" xs={12}>
+      <Grid item justify="center" xs={12}>
         {answer
           ? <Submit onClick={continueHandler}>CONTINUE</Submit>
           : <Submit disabled={!selection} onClick={submitHandler}>SUBMIT</Submit>
