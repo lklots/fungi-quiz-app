@@ -58,7 +58,7 @@ export default function Quiz() {
   }
 
   return (
-    <Grid container direction="column" alignItems="center" spacing={2}>
+  <Grid container direction="column" alignItems="center" spacing={2}>
       <Grid item>
         <Question
           answer={answer}

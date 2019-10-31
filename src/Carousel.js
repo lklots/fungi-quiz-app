@@ -8,14 +8,19 @@ import Magnifier from 'react-magnifier';
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 
-import './Carousel.css';
+import './useWindowSize.js';
 
-const MAX_HEIGHT = 400;
-const MAX_WIDTH = 500;
+import './Carousel.css';
+import useWindowSize from './useWindowSize.js';
+
+const PIC_MAX_HEIGHT_PERCENT = 40;
+const PIC_MAX_WIDTH_PX = 500; // iNaturalist medium image width is 500px
 
 export default function Carousel({photos}) {
+
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
   const images = photos.map( (pic, i) => {
-    const { width, height } = calcAspectRatioFit(pic.origWidth, pic.origHeight, MAX_WIDTH, MAX_HEIGHT);
+    const { width, height } = calcAspectRatioFit(pic.origWidth, pic.origHeight, PIC_MAX_WIDTH_PX, (PIC_MAX_HEIGHT_PERCENT * windowHeight)/100);
     return (
       <div key={i} className="carousel-slide">
         <Magnifier src={pic.url} width={width} height={height} />
@@ -32,7 +37,8 @@ export default function Carousel({photos}) {
     prevArrow: <ArrowPrev />
   };
   return (
-    <div className="carousel-container">
+    // HACKS: contain the width of the carousel and leave some space for the arrows.
+    <div className="carousel-container" style={{width: Math.min(PIC_MAX_WIDTH_PX-100, windowWidth-100)+"px" }}>
       <Slider {...settings}>
         {images}
       </Slider>
