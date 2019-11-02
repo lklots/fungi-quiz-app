@@ -6,7 +6,6 @@ import Quiz from './Quiz.js';
 import 'typeface-varela-round';
 import './App.css';
 
-
 const client = new GraphQLClient({
   url: 'http://localhost:4000/graphql'
 })
