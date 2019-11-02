@@ -10,6 +10,7 @@
   background-color: #68C106;
   color: #FFFFFF;
   cursor: pointer;
+  font-size: calc(0.5rem + 2vmin);
 }
 
 @media not all and (hover: none) {
