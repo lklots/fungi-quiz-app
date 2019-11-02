@@ -5,8 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Magnifier from 'react-magnifier';
 
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
-import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import PlayCircleFilledRoundedIcon from '@material-ui/icons/PlayCircleFilledRounded';
 
 import './useWindowSize.js';
 
@@ -55,7 +54,7 @@ function ArrowNext(props) {
   const { onClick } = props;
   return (
     <div onClick={onClick} className="carousel-arrow-next">
-      <ArrowForwardRoundedIcon color="action" fontSize="large" />
+      <PlayCircleFilledRoundedIcon color="action" fontSize="large" />
     </div>
   );
 }
@@ -64,7 +63,7 @@ function ArrowPrev(props) {
   const { onClick } = props;
   return (
     <div onClick={onClick} className="carousel-arrow-prev">
-      <ArrowBackRoundedIcon color="action" fontSize="large" />
+      <PlayCircleFilledRoundedIcon color="action" fontSize="large" />
     </div>
   );
 }

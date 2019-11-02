@@ -68,7 +68,7 @@ export default function Quiz() {
           onSelected={(taxonId) => setSelection(taxonId)}
         />
       </Grid>
-      <Grid item justify="center" xs={12}>
+      <Grid item>
         {answer
           ? <Submit onClick={continueHandler}>CONTINUE</Submit>
           : <Submit disabled={!selection} onClick={submitHandler}>SUBMIT</Submit>

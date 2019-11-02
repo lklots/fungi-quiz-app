@@ -1,5 +1,7 @@
 .carousel-container {
   margin: 0 auto;
+  border: 3px solid #DDDDDF50;
+  background-color: #DDDDDF30;
 }
 
 .carousel-slide {
@@ -22,5 +24,6 @@
   width: 20px;
   height: 20px;
   transform: translate(0, -50%);
-  left: -45px;
+  left: -25px;
+  transform: rotate(180deg);
 }
