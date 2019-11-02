@@ -9,7 +9,6 @@
   border-radius: 10px;
   padding: 5px;
   border: 2px solid #DDDDDF;
-  border-bottom: 4px solid #DDDDDF;
   color: #373736;
   cursor: pointer;
 }
@@ -30,7 +29,6 @@
   border-bottom: 2px solid #DDDDDF;
   color: #1DA0F3;
   border-color: #1DA0F3;
-  transform: translate3d(0, 4px, 0);
 }
 
 .choice-title {
@@ -57,7 +55,6 @@
 .choice-correct:hover {
   background-color: #ACF278;
   border: 2px solid #68C100;
-  border-bottom-width: 4px;
   color: #499A08;
 }
 
@@ -70,7 +67,6 @@ div.choice-correct > .choice-subtitle,
 .choice-wrong:hover {
   background-color: #FCB2B4;
   border: 2px solid #FB313B;
-  border-bottom-width: 4px;
   color: #E21724;
 }
 
