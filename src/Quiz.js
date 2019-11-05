@@ -56,18 +56,18 @@ export default function Quiz() {
   }
 
   return (
-    <Grid container direction="column" alignItems="center" spacing={2}>
+    <Grid container direction="column" alignItems="center">
       <Question
-        guess={guess}
-        qid={data.createQuestion.qid}
-        photos={data.createQuestion.photos}
-        choices={data.createQuestion.choices}
-        onSelected={(taxonId) => setSelection(taxonId)}
-      />
+      guess={guess}
+      qid={data.createQuestion.qid}
+      photos={data.createQuestion.photos}
+      choices={data.createQuestion.choices}
+      onSelected={(taxonId) => setSelection(taxonId)}
+    />
       <Panel
-        guess={guess}
-        selection={selection}
-        onSubmit={submitGuess}
-        onContinue={onContinue} />
+      guess={guess}
+      selection={selection}
+      onSubmit={submitGuess}
+      onContinue={onContinue} />
     </Grid>);
   }

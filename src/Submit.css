@@ -5,12 +5,11 @@
   border-radius: 10px;
   padding: 20px;
   width: 100%;
-  max-width: 20vw;
   max-height: 2vh;
   border-width: 4px;
   color: #FFFFFF;
   cursor: pointer;
-  font-size: 15px;
+  font-size: calc(0.5rem + 2vmin);;
   font-weight: 700;
   letter-spacing: .8px;
   text-transform: uppercase;

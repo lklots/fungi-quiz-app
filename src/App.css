@@ -5,7 +5,7 @@ body {
 }
 
 #app {
-  padding: 10px;
+  padding-top: 15px;
 }
 
 .noSelect {
@@ -19,15 +19,14 @@ body {
 }
 
 .panel {
-  min-height: 30vh;
+  height: 100%;
+  margin-top: 4vh;
 }
 
 .panel-correct {
-  min-height: 30vh;
   background-color: #ABF379;
 }
 
 .panel-wrong {
-  min-height: 30vh;
   background-color: #FEB2B4;
 }
