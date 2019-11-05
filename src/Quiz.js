@@ -32,7 +32,9 @@ const MAKE_GUESS = `
 
 export default function Quiz() {
   const [createQuestion, { loading, error, data }] = useMutation(CREATE_QUESTION);
-  useEffect(() => createQuestion({variables: { taxonId: 47347 }}), []);
+  useEffect(() => {
+    createQuestion({variables: { taxonId: 47347 }});
+  }, [createQuestion]);
 
   const [makeGuess] = useMutation(MAKE_GUESS);
   const [selection, setSelection] = useState(null);
@@ -58,16 +60,16 @@ export default function Quiz() {
   return (
     <Grid container direction="column" alignItems="center">
       <Question
-      guess={guess}
-      qid={data.createQuestion.qid}
-      photos={data.createQuestion.photos}
-      choices={data.createQuestion.choices}
-      onSelected={(taxonId) => setSelection(taxonId)}
-    />
+        guess={guess}
+        qid={data.createQuestion.qid}
+        photos={data.createQuestion.photos}
+        choices={data.createQuestion.choices}
+        onSelected={(taxonId) => setSelection(taxonId)}
+      />
       <Panel
-      guess={guess}
-      selection={selection}
-      onSubmit={submitGuess}
-      onContinue={onContinue} />
+        guess={guess}
+        selection={selection}
+        onSubmit={submitGuess}
+        onContinue={onContinue} />
     </Grid>);
   }
