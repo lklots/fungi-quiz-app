@@ -6,7 +6,7 @@ import {useSpring, useTrail, animated, useChain} from 'react-spring';
 import Choice from './Choice.js';
 import Carousel from './Carousel.js';
 
-export default function Question({qid, photos, choices, answer, onSelected }) {
+export default function Question({qid, photos, choices, guess, onSelected }) {
   // Animation
   const animateContainerRef = useRef();
   const animateContainerProps = useSpring({
@@ -26,8 +26,8 @@ export default function Question({qid, photos, choices, answer, onSelected }) {
 
   const buttons = choices.map( (choice, index) => {
     let mode = 'unselected';
-    if (answer) {
-      if (answer === choice.taxonId) {
+    if (guess) {
+      if (guess === choice.taxonId) {
         mode = 'correct';
       } else if (selected === choice.taxonId) {
         mode = 'wrong';
@@ -46,7 +46,7 @@ export default function Question({qid, photos, choices, answer, onSelected }) {
           mode={mode}
           onClick={() => {
             setSelected(choice.taxonId);
-            onSelected(qid, choice.taxonId);
+            onSelected(choice.taxonId);
           }} />
       </animated.div>
     );

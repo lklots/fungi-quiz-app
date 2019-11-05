@@ -17,3 +17,17 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.panel {
+  min-height: 30vh;
+}
+
+.panel-correct {
+  min-height: 30vh;
+  background-color: #ABF379;
+}
+
+.panel-wrong {
+  min-height: 30vh;
+  background-color: #FEB2B4;
+}
