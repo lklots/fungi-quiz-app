@@ -25,17 +25,15 @@ export default function Question({qid, photos, choices, guess, onSelected }) {
   const [selected, setSelected] = useState(null);
 
   const buttons = choices.map( (choice, index) => {
-    let mode = 'unselected';
+    let color = '';
     if (guess) {
       if (guess === choice.taxonId) {
-        mode = 'correct';
+        color = 'green';
       } else if (selected === choice.taxonId) {
-        mode = 'wrong';
-      } else {
-        mode = 'unselected-ignore';
+        color = 'red';
       }
     } else if (choice.taxonId === selected) {
-      mode = 'selected';
+      color = 'blue';
     }
 
     return (
@@ -43,10 +41,12 @@ export default function Question({qid, photos, choices, guess, onSelected }) {
         <Choice
           title={choice.commonName}
           subtitle={choice.name}
-          mode={mode}
+          color={color}
           onClick={() => {
-            setSelected(choice.taxonId);
-            onSelected(choice.taxonId);
+            if (!guess) {
+              setSelected(choice.taxonId);
+              onSelected(choice.taxonId);
+            }
           }} />
       </animated.div>
     );

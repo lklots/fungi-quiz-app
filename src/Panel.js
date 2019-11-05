@@ -14,8 +14,8 @@ export default function Panel({guess, selection, onSubmit, onContinue }) {
     <Grid className={"panel "+className} container direction="row" justify="center" alignItems="center">
       <Grid item xs={2}>
       {(selection && guess)
-        ? <Submit onClick={onContinue} color={color}>CONTINUE</Submit>
-        : <Submit disabled={!selection} onClick={onSubmit} color="green">SUBMIT</Submit>
+        ? <Submit onClick={onContinue} color={color}>continue</Submit>
+        : <Submit disabled={!selection} onClick={onSubmit} color="green">submit</Submit>
       }
       </Grid>
     </Grid>

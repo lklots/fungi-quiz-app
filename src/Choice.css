@@ -24,7 +24,7 @@
 }
 
 .choice:active,
-.choice-selected {
+.choice-blue {
   background-color: #D6F1FE;
   border-bottom: 2px solid #DDDDDF;
   color: #1DA0F3;
@@ -51,27 +51,27 @@
   color: #1DA0F390;
 }
 
-.choice-correct,
-.choice-correct:hover {
+.choice-green,
+.choice-green:hover {
   background-color: #ACF278;
   border: 2px solid #68C100;
   color: #499A08;
 }
 
-div.choice-correct > .choice-subtitle,
-.choice-correct:hover > .choice-subtitle {
+div.choice-green > .choice-subtitle,
+.choice-green:hover > .choice-subtitle {
   color: #499A0890;
 }
 
-.choice-wrong,
-.choice-wrong:hover {
+.choice-red,
+.choice-red:hover {
   background-color: #FCB2B4;
   border: 2px solid #FB313B;
   color: #E21724;
 }
 
-.choice-wrong > .choice-subtitle,
-.choice-wrong:hover > .choice-subtitle {
+.choice-red > .choice-subtitle,
+.choice-red:hover > .choice-subtitle {
   color: #E2172490;
 }
 
