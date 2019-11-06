@@ -6,19 +6,22 @@ import Grid from '@material-ui/core/Grid';
 import Question from './Question.js';
 import Panel from './Panel.js';
 
-const CREATE_QUESTION = `
-  mutation($taxonId: ID!) {
-    createQuestion(taxonId: $taxonId) {
-      questionId
-      photos {
-        url
-        origWidth
-        origHeight
-      }
-      choices {
-        taxonId
-        name
-        commonName
+const CREATE_QUIZ = `
+  mutation ($taxonIds: [ID]!) {
+    createQuiz(taxonIds: $taxonIds) {
+      quizId
+      questions {
+        questionId
+        photos {
+          url
+          origWidth
+          origHeight
+        }
+        choices {
+          taxonId
+          name
+          commonName
+        }
       }
     }
   }
@@ -31,30 +34,34 @@ const MAKE_GUESS = `
 `;
 
 export default function Quiz() {
-  const [createQuestion, { loading, error, data }] = useMutation(CREATE_QUESTION);
-  useEffect(() => {
-    createQuestion({variables: { taxonId: 47347 }});
-  }, [createQuestion]);
-
   const [makeGuess, {loading: loadingGuess}] = useMutation(MAKE_GUESS);
   const [selection, setSelection] = useState(null);
   const [guess, setGuess] = useState(null);
+  const [qIndex, setQIndex] = useState(0);
+
+  const [createQuiz, { loading, error, data }] = useMutation(CREATE_QUIZ);
+  useEffect(() => {
+    createQuiz({variables: { taxonIds: [47347, 67752, 63538] } });
+  }, [createQuiz]);
 
   if (loading) return 'Loading...';
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
   if (!data) return 'Initial load...';
+  if (qIndex >= data.createQuiz.questions.length) return 'You finished the quiz!';
+
+  const question = data.createQuiz.questions[qIndex];
 
   const submitGuess = async() => {
-    const resp = await makeGuess({ variables: { questionId: data.createQuestion.questionId, taxonId: selection }});
+    const resp = await makeGuess({ variables: { questionId: question.questionId, taxonId: selection }});
     if (resp.data) {
       setGuess(resp.data.makeGuess);
     }
   }
 
   const onContinue = async() => {
-    await createQuestion({ variables: { taxonId: 47347 }});
     setGuess(null);
     setSelection(null);
+    setQIndex(qIndex+1);
   }
 
   return (
@@ -62,9 +69,9 @@ export default function Quiz() {
       <Question
         guess={guess}
         disabled={loadingGuess}
-        questionId={data.createQuestion.questionId}
-        photos={data.createQuestion.photos}
-        choices={data.createQuestion.choices}
+        questionId={question.questionId}
+        photos={question.photos}
+        choices={question.choices}
         onSelected={(taxonId) => setSelection(taxonId)}
       />
       <Panel
