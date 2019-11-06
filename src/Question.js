@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
-import {useSpring, useTrail, animated, useChain} from 'react-spring';
+import { config, useSpring, useTrail, animated, useChain } from 'react-spring';
 
 import Choice from './Choice.js';
 import Carousel from './Carousel.js';
@@ -11,14 +11,16 @@ export default function Question({ questionId, disabled, photos, choices, guess,
   const animateContainerRef = useRef();
   const animateContainerProps = useSpring({
     ref: animateContainerRef,
-    from: { marginLeft: 20, opacity: 0, transform: 'translate3d(40, 0px, 0)' },
-    to: { marginLeft: 0, opacity: 1, transform: 'translate3d(0, 0px, 0)' }
+    from: { marginLeft: 60, opacity: 0, transform: 'translate3d(40, 0px, 0)' },
+    to: { marginLeft: 0, opacity: 1, transform: 'translate3d(0, 0px, 0)' },
+    config: config.wobbly,
   });
   const animateChoicesRef = useRef();
   const animateChoicesProps = useTrail(choices.length, {
     ref: animateChoicesRef,
-    from: { marginLeft: -20, opacity: 0, transform: 'translate3d(40px, 0px, 0)' },
-    to: { marginLeft: 0, opacity: 1, transform: 'translate3d(0, 0px, 0)' }
+    from: { marginLeft: -40, opacity: 0, transform: 'translate3d(40px, 0px, 0)' },
+    to: { marginLeft: 0, opacity: 1, transform: 'translate3d(0, 0px, 0)' },
+    config: config.wobbly,
   });
   useChain([animateContainerRef, animateChoicesRef], [0, 0.2]);
 

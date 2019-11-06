@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './Submit.css';
 
-export default function Submit({onClick, disabled, children, color}) {
+export default function Submit({onClick, disabled, children, color }) {
   let className = "submit";
   if (disabled) {
     className += " submit-disabled";

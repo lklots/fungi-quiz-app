@@ -67,6 +67,7 @@ export default function Quiz() {
   return (
     <Grid container direction="column" alignItems="center">
       <Question
+        key={question.questionId}
         guess={guess}
         disabled={loadingGuess}
         questionId={question.questionId}
