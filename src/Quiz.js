@@ -36,7 +36,7 @@ export default function Quiz() {
     createQuestion({variables: { taxonId: 47347 }});
   }, [createQuestion]);
 
-  const [makeGuess] = useMutation(MAKE_GUESS);
+  const [makeGuess, {loading: loadingGuess}] = useMutation(MAKE_GUESS);
   const [selection, setSelection] = useState(null);
   const [guess, setGuess] = useState(null);
 
@@ -61,6 +61,7 @@ export default function Quiz() {
     <Grid container direction="column" alignItems="center">
       <Question
         guess={guess}
+        disabled={loadingGuess}
         qid={data.createQuestion.qid}
         photos={data.createQuestion.photos}
         choices={data.createQuestion.choices}
