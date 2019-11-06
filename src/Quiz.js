@@ -9,7 +9,7 @@ import Panel from './Panel.js';
 const CREATE_QUESTION = `
   mutation($taxonId: ID!) {
     createQuestion(taxonId: $taxonId) {
-      qid
+      questionId
       photos {
         url
         origWidth
@@ -25,8 +25,8 @@ const CREATE_QUESTION = `
 `;
 
 const MAKE_GUESS = `
-  mutation($qid: ID!, $taxonId: ID!) {
-    makeGuess(qid: $qid, taxonId: $taxonId)
+  mutation($questionId: ID!, $taxonId: ID!) {
+    makeGuess(questionId: $questionId, taxonId: $taxonId)
   }
 `;
 
@@ -45,7 +45,7 @@ export default function Quiz() {
   if (!data) return 'Initial load...';
 
   const submitGuess = async() => {
-    const resp = await makeGuess({ variables: { qid: data.createQuestion.qid, taxonId: selection }});
+    const resp = await makeGuess({ variables: { questionId: data.createQuestion.questionId, taxonId: selection }});
     if (resp.data) {
       setGuess(resp.data.makeGuess);
     }
@@ -62,7 +62,7 @@ export default function Quiz() {
       <Question
         guess={guess}
         disabled={loadingGuess}
-        qid={data.createQuestion.qid}
+        questionId={data.createQuestion.questionId}
         photos={data.createQuestion.photos}
         choices={data.createQuestion.choices}
         onSelected={(taxonId) => setSelection(taxonId)}

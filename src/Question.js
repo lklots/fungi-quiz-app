@@ -6,7 +6,7 @@ import {useSpring, useTrail, animated, useChain} from 'react-spring';
 import Choice from './Choice.js';
 import Carousel from './Carousel.js';
 
-export default function Question({qid, disabled, photos, choices, guess, onSelected }) {
+export default function Question({ questionId, disabled, photos, choices, guess, onSelected }) {
   // Animation
   const animateContainerRef = useRef();
   const animateContainerProps = useSpring({
