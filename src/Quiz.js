@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Question from './Question.js';
 import Panel from './Panel.js';
+import Progress from './Progress.js';
 
 const CREATE_QUIZ = `
   mutation ($taxonIds: [ID]!) {
@@ -46,9 +47,10 @@ export default function Quiz() {
     createQuiz({variables: { taxonIds: [taxonId] } });
   }, [createQuiz]);
 
-  if (loading) return 'Loading...';
+  if (loading || !data) {
+    return <Progress />;
+  }
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
-  if (!data) return 'Initial load...';
   if (questionIndex >= data.createQuiz.questions.length) return 'You finished the quiz!';
 
   const question = data.createQuiz.questions[questionIndex];
