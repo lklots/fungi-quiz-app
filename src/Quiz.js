@@ -45,7 +45,7 @@ export default function Quiz() {
   const [createQuiz, { loading, error, data }] = useMutation(CREATE_QUIZ);
   useEffect(() => {
     createQuiz({variables: { taxonIds: [taxonId] } });
-  }, [createQuiz]);
+  }, [createQuiz, taxonId]);
 
   if (loading || !data) {
     return <Progress />;
