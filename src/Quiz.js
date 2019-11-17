@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'graphql-hooks';
+import {  useParams } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -34,6 +35,7 @@ const MAKE_GUESS = `
 `;
 
 export default function Quiz() {
+  const { taxonId } = useParams();
   const [makeGuess, {loading: loadingGuess}] = useMutation(MAKE_GUESS);
   const [selection, setSelection] = useState(null);
   const [guess, setGuess] = useState(null);
@@ -41,7 +43,7 @@ export default function Quiz() {
 
   const [createQuiz, { loading, error, data }] = useMutation(CREATE_QUIZ);
   useEffect(() => {
-    createQuiz({variables: { taxonIds: [47347, 67752, 63538] } });
+    createQuiz({variables: { taxonIds: [taxonId] } });
   }, [createQuiz]);
 
   if (loading) return 'Loading...';

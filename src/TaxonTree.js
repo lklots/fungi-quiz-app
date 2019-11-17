@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { useQuery } from 'graphql-hooks';
+import { Link } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -17,14 +18,14 @@ const GET_TAXON_TREE = `
   }
 `;
 
-export default function TaxonTree({ onSelected }) {
+export default function TaxonTree() {
 
   const { loading, error, data } = useQuery(GET_TAXON_TREE);
   if (loading) return 'Loading...';
 
   const taxons = data.getTaxonTree.map((taxon) =>
     <Grid item>
-      <TaxonAvatar onClick={()=>onSelected(taxon.taxonId)} taxon={taxon} />
+      <TaxonAvatar taxon={taxon} />
     </Grid>
   );
   return (
@@ -37,11 +38,13 @@ export default function TaxonTree({ onSelected }) {
 function TaxonAvatar({ taxon, onClick }) {
   return (
     <div class="taxon-avatar">
-      <div class="taxon-avatar-frame" onClick={onClick}>
-        <div class="taxon-avatar-crop">
-          <img alt="" src={taxon.photoUrl} />
+      <Link to={`/quiz/${taxon.taxonId}`}>
+        <div class="taxon-avatar-frame">
+          <div class="taxon-avatar-crop">
+            <img alt="" src={taxon.photoUrl} />
+          </div>
         </div>
-      </div>
+      </Link>
       <span>{taxon.commonName}</span>
     </div>
   );
