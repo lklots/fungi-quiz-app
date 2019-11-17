@@ -1,0 +1,36 @@
+.taxon-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.taxon-avatar > span {
+  text-align: center;
+}
+
+.taxon-avatar-frame {
+  display: inline-block;
+  border-radius: 50%;
+  border: solid #DFDFDF 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.taxon-avatar-frame:hover {
+  border-color: #1DA0F3;
+}
+
+.taxon-avatar-crop {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.taxon-avatar-crop > img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
 
 import Quiz from './Quiz.js';
+import TaxonTree from './TaxonTree.js';
 
 import 'typeface-varela-round';
 import './App.css';
@@ -10,14 +11,12 @@ const client = new GraphQLClient({
   url: 'http://localhost:4000/graphql'
 })
 
-function App() {
+export default function App() {
   return (
     <ClientContext.Provider value={client}>
       <div id="app">
-        <Quiz />
+        <TaxonTree onSelected={() => {}} />
       </div>
     </ClientContext.Provider>
   );
 }
-
-export default App;
