@@ -37,7 +37,7 @@ export default function Quiz() {
   const [makeGuess, {loading: loadingGuess}] = useMutation(MAKE_GUESS);
   const [selection, setSelection] = useState(null);
   const [guess, setGuess] = useState(null);
-  const [qIndex, setQIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   const [createQuiz, { loading, error, data }] = useMutation(CREATE_QUIZ);
   useEffect(() => {
@@ -47,9 +47,9 @@ export default function Quiz() {
   if (loading) return 'Loading...';
   if (error) return 'Something Bad Happened: ' + JSON.stringify(error, undefined, 2);
   if (!data) return 'Initial load...';
-  if (qIndex >= data.createQuiz.questions.length) return 'You finished the quiz!';
+  if (questionIndex >= data.createQuiz.questions.length) return 'You finished the quiz!';
 
-  const question = data.createQuiz.questions[qIndex];
+  const question = data.createQuiz.questions[questionIndex];
 
   const submitGuess = async() => {
     const resp = await makeGuess({ variables: { questionId: question.questionId, taxonId: selection }});
@@ -61,7 +61,7 @@ export default function Quiz() {
   const onContinue = async() => {
     setGuess(null);
     setSelection(null);
-    setQIndex(qIndex+1);
+    setQuestionIndex(questionIndex+1);
   }
 
   return (
