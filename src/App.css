@@ -23,6 +23,10 @@ body {
   margin-top: 4vh;
 }
 
+.panel > .submit {
+  max-width: 20vw;
+}
+
 .panel-correct {
   background-color: #ABF379;
 }
