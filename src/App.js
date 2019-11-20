@@ -14,8 +14,8 @@ import 'typeface-varela-round';
 import './App.css';
 
 const client = new GraphQLClient({
-  url: 'http://localhost:4000/graphql'
-})
+  url: process.env.REACT_APP_API_URI
+});
 
 export default function App() {
   return (
